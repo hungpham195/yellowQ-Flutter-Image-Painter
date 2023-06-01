@@ -780,73 +780,75 @@ class ImagePainterState extends State<ImagePainter> {
   }
 
   Widget _buildControls() {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      color: Colors.black,
-      child: Row(
-        children: [
-          // AnimatedBuilder(
-          //   animation: _controller,
-          //   builder: (_, __) {
-          //     final icon = paintModes(textDelegate)
-          //         .firstWhere((item) => item.mode == _controller.mode)
-          //         .icon;
-          //     return PopupMenuButton(
-          //       tooltip: textDelegate.changeMode,
-          //       shape: ContinuousRectangleBorder(
-          //         borderRadius: BorderRadius.circular(40),
-          //       ),
-          //       icon: Icon(icon, color: Colors.grey[700]),
-          //       itemBuilder: (_) => [_showOptionsRow()],
-          //     );
-          //   },
-          // ),
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (_, __) {
-              return PopupMenuButton(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                tooltip: textDelegate.changeColor,
-                icon: widget.colorIcon ??
-                    Container(
-                      padding: const EdgeInsets.all(2.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey),
-                        color: _controller.color,
-                      ),
-                    ),
-                itemBuilder: (_) => [_showColorPicker()],
-              );
-            },
-          ),
-          PopupMenuButton(
-            tooltip: textDelegate.changeBrushSize,
-            shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+    return Card(
+      color: Colors.black54,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (_, __) {
+                final icon = paintModes(textDelegate)
+                    .firstWhere((item) => item.mode == _controller.mode)
+                    .icon;
+                return PopupMenuButton(
+                  tooltip: textDelegate.changeMode,
+                  shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  icon: Icon(icon, color: Colors.grey[700]),
+                  itemBuilder: (_) => [_showOptionsRow()],
+                );
+              },
             ),
-            icon:
-                widget.brushIcon ?? Icon(Icons.brush, color: Colors.white),
-            itemBuilder: (_) => [_showRangeSlider()],
-          ),
-          IconButton(
-              icon: const Icon(Icons.text_format), onPressed: _openTextDialog),
-          const Spacer(),
-          IconButton(
-            tooltip: textDelegate.undo,
-            icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.white),
-            onPressed: () => _controller.undo(),
-          ),
-          IconButton(
-            tooltip: textDelegate.clearAllProgress,
-            icon: widget.clearAllIcon ??
-                Icon(Icons.clear, color: Colors.white),
-            onPressed: () => _controller.clear(),
-          ),
-        ],
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (_, __) {
+                return PopupMenuButton(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  tooltip: textDelegate.changeColor,
+                  icon: widget.colorIcon ??
+                      Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey),
+                          color: _controller.color,
+                        ),
+                      ),
+                  itemBuilder: (_) => [_showColorPicker()],
+                );
+              },
+            ),
+            PopupMenuButton(
+              tooltip: textDelegate.changeBrushSize,
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              icon:
+                  widget.brushIcon ?? Icon(Icons.brush, color: Colors.white),
+              itemBuilder: (_) => [_showRangeSlider()],
+            ),
+            IconButton(
+                icon: const Icon(Icons.text_format, color: Colors.white,), onPressed: _openTextDialog),
+            const Spacer(),
+            IconButton(
+              tooltip: textDelegate.undo,
+              icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.white),
+              onPressed: () => _controller.undo(),
+            ),
+            IconButton(
+              tooltip: textDelegate.clearAllProgress,
+              icon: widget.clearAllIcon ??
+                  Icon(Icons.clear, color: Colors.white),
+              onPressed: () => _controller.clear(),
+            ),
+          ],
+        ),
       ),
     );
   }
