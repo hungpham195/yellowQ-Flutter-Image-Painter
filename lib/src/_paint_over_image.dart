@@ -476,8 +476,8 @@ class ImagePainterState extends State<ImagePainter> {
   ///paints image on given constrains for drawing if image is not null.
   Widget _paintImage() {
     return Container(
-      // height: widget.height ?? double.maxFinite,
-      // width: widget.width ?? double.maxFinite,
+      height: widget.height ?? double.maxFinite,
+      width: widget.width ?? double.maxFinite,
       child: Column(
         children: [
           if (widget.controlsAtTop) _buildControls(),
@@ -509,6 +509,7 @@ class ImagePainterState extends State<ImagePainter> {
               ),
             ),
           ),
+          SizedBox(height: 10),
           if (!widget.controlsAtTop) _buildControls(),
           SizedBox(height: MediaQuery.of(context).padding.bottom)
         ],
@@ -781,25 +782,25 @@ class ImagePainterState extends State<ImagePainter> {
   Widget _buildControls() {
     return Container(
       padding: const EdgeInsets.all(4),
-      color: Colors.grey[200],
+      color: Colors.black,
       child: Row(
         children: [
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (_, __) {
-              final icon = paintModes(textDelegate)
-                  .firstWhere((item) => item.mode == _controller.mode)
-                  .icon;
-              return PopupMenuButton(
-                tooltip: textDelegate.changeMode,
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                icon: Icon(icon, color: Colors.grey[700]),
-                itemBuilder: (_) => [_showOptionsRow()],
-              );
-            },
-          ),
+          // AnimatedBuilder(
+          //   animation: _controller,
+          //   builder: (_, __) {
+          //     final icon = paintModes(textDelegate)
+          //         .firstWhere((item) => item.mode == _controller.mode)
+          //         .icon;
+          //     return PopupMenuButton(
+          //       tooltip: textDelegate.changeMode,
+          //       shape: ContinuousRectangleBorder(
+          //         borderRadius: BorderRadius.circular(40),
+          //       ),
+          //       icon: Icon(icon, color: Colors.grey[700]),
+          //       itemBuilder: (_) => [_showOptionsRow()],
+          //     );
+          //   },
+          // ),
           AnimatedBuilder(
             animation: _controller,
             builder: (_, __) {
@@ -828,7 +829,7 @@ class ImagePainterState extends State<ImagePainter> {
               borderRadius: BorderRadius.circular(20),
             ),
             icon:
-                widget.brushIcon ?? Icon(Icons.brush, color: Colors.grey[700]),
+                widget.brushIcon ?? Icon(Icons.brush, color: Colors.white),
             itemBuilder: (_) => [_showRangeSlider()],
           ),
           IconButton(
@@ -836,13 +837,13 @@ class ImagePainterState extends State<ImagePainter> {
           const Spacer(),
           IconButton(
             tooltip: textDelegate.undo,
-            icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.grey[700]),
+            icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.white),
             onPressed: () => _controller.undo(),
           ),
           IconButton(
             tooltip: textDelegate.clearAllProgress,
             icon: widget.clearAllIcon ??
-                Icon(Icons.clear, color: Colors.grey[700]),
+                Icon(Icons.clear, color: Colors.white),
             onPressed: () => _controller.clear(),
           ),
         ],
