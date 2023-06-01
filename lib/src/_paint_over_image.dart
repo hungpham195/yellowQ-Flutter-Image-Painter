@@ -476,8 +476,8 @@ class ImagePainterState extends State<ImagePainter> {
   ///paints image on given constrains for drawing if image is not null.
   Widget _paintImage() {
     return Container(
-      height: widget.height ?? double.maxFinite,
-      width: widget.width ?? double.maxFinite,
+      // height: widget.height ?? double.maxFinite,
+      // width: widget.width ?? double.maxFinite,
       child: Column(
         children: [
           if (widget.controlsAtTop) _buildControls(),
@@ -490,8 +490,6 @@ class ImagePainterState extends State<ImagePainter> {
                   builder: (context, child) {
                     return InteractiveViewer(
                       transformationController: _transformationController,
-                      maxScale: 1,
-                      minScale: 1,
                       panEnabled: _controller.mode == PaintMode.none,
                       scaleEnabled: widget.isScalable!,
                       onInteractionUpdate: _scaleUpdateGesture,
