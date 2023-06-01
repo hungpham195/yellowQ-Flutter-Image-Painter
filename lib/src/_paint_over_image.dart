@@ -480,7 +480,9 @@ class ImagePainterState extends State<ImagePainter> {
       width: widget.width ?? double.maxFinite,
       child: Column(
         children: [
+          SizedBox(height: 16),
           if (widget.controlsAtTop) _buildControls(),
+          SizedBox(height: 16),
           Expanded(
             child: FittedBox(
               alignment: FractionalOffset.center,
@@ -509,7 +511,7 @@ class ImagePainterState extends State<ImagePainter> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 16),
           if (!widget.controlsAtTop) _buildControls(),
           SizedBox(height: MediaQuery.of(context).padding.bottom)
         ],
@@ -797,7 +799,7 @@ class ImagePainterState extends State<ImagePainter> {
                   shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
-                  icon: Icon(icon, color: Colors.grey[700]),
+                  icon: Icon(icon, color: Colors.white),
                   itemBuilder: (_) => [_showOptionsRow()],
                 );
               },
